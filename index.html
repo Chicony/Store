@@ -1,12 +1,163 @@
 <!DOCTYPE html>
 <html lang="ru">
   <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>widget</title>
+    <link rel="stylesheet" href="saas_shop_style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700&display=swap" rel="stylesheet">
   </head>
   <body>
-    <div id="saasShopWidget"></div>
-    <script src="saas_shop.js"></script>
-    <script>saas_shop_create_tariffs(1);</script>
+    <div class="saas-shop-container">
+      <div class="saas-shop-title">Тарифы</div>
+      <div class="saas-shop-period-container">
+        <div class="saas-shop-period-title">
+          Месячный
+        </div>
+        <label class="saas-shop-period">
+          <input type="checkbox" class="saas-shop-period-input">
+          <span class="saas-shop-slider"></span>
+        </label>
+        <div class="saas-shop-period-title">
+          Годовой
+          <span class="saas-shop-period-sale">
+            - 15%
+          </span>
+        </div>
+      </div>
+      <div class="saas-shop-row">
+        <div class="saas-shop-card">
+          <div class="saas-shop-card-name">Базовый</div>
+          <div class="saas-shop-card-price">
+            <span class="saas-shop-price-value">1 500 ₽</span>
+            <span class="saas-shop-price-text">/ лицензия</span>
+          </div>
+          <ul class="saas-shop-card-list">
+            <li class="saas-shop-list-item">
+              <span class="saas-shop-icon-check"></span>
+              Первое преимущество
+            </li>
+            <li class="saas-shop-list-item">
+              <span class="saas-shop-icon-check"></span>
+              Второе преимущество
+            </li>
+            <li class="saas-shop-list-item saas-shop-list-item-none">
+              <span class="saas-shop-icon-close"></span>
+              Третье преимущество
+            </li>
+            <li class="saas-shop-list-item saas-shop-list-item-none">
+              <span class="saas-shop-icon-close"></span>
+              Четвёртое преимущество
+            </li>
+            <li class="saas-shop-list-item saas-shop-list-item-none">
+              <span class="saas-shop-icon-close"></span>
+              Пятое преимущество
+            </li>
+          </ul>
+          <form class="saas-shop-card-form">
+            <div class="saas-shop-form-data">
+              <span class="saas-shop-count-name">Кол-во лицензий:</span>
+              <div class="saas-shop-form-control">
+                <span class="saas-shop-form-minus">-</span>
+                <input class="saas-shop-form-input"
+                       type="number" name="count" min="1" max="10" value="1">
+                <span class="saas-shop-form-plus">+</span>
+              </div>
+            </div>
+            <button class="saas-shop-card-button" type="button">
+              Купить за 1 500 ₽
+            </button>
+          </form>
+        </div>
+        <div class="saas-shop-card">
+          <div class="saas-shop-card-name">Профессиональный</div>
+          <div class="saas-shop-card-price">
+            <span class="saas-shop-price-value">3 000 ₽</span>
+            <span class="saas-shop-price-text">/ лицензия</span>
+          </div>
+          <ul class="saas-shop-card-list">
+            <li class="saas-shop-list-item">
+              <span class="saas-shop-icon-check"></span>
+              Первое преимущество
+            </li>
+            <li class="saas-shop-list-item">
+              <span class="saas-shop-icon-check"></span>
+              Второе преимущество
+            </li>
+            <li class="saas-shop-list-item">
+              <span class="saas-shop-icon-check"></span>
+              Третье преимущество
+            </li>
+            <li class="saas-shop-list-item saas-shop-list-item-none">
+              <span class="saas-shop-icon-close"></span>
+              Четвёртое преимущество
+            </li>
+            <li class="saas-shop-list-item saas-shop-list-item-none">
+              <span class="saas-shop-icon-close"></span>
+              Пятое преимущество
+            </li>
+          </ul>
+          <form class="saas-shop-card-form">
+            <div class="saas-shop-form-data">
+              <span class="saas-shop-count-name">Кол-во лицензий:</span>
+              <div class="saas-shop-form-control">
+                <span class="saas-shop-form-minus">-</span>
+                <input class="saas-shop-form-input"
+                       type="number" name="count" min="1" max="10" value="1">
+                <span class="saas-shop-form-plus">+</span>
+              </div>
+            </div>
+            <button class="saas-shop-card-button" type="button">
+              Купить за 3 000 ₽
+            </button>
+          </form>
+        </div>
+        <div class="saas-shop-card">
+          <div class="saas-shop-card-name">Премиум</div>
+          <div class="saas-shop-card-price">
+            <span class="saas-shop-price-value">6 500 ₽</span>
+            <span class="saas-shop-price-text">/ лицензия</span>
+          </div>
+          <ul class="saas-shop-card-list">
+            <li class="saas-shop-list-item">
+              <span class="saas-shop-icon-check"></span>
+              Первое преимущество
+            </li>
+            <li class="saas-shop-list-item">
+              <span class="saas-shop-icon-check"></span>
+              Второе преимущество
+            </li>
+            <li class="saas-shop-list-item">
+              <span class="saas-shop-icon-check"></span>
+              Третье преимущество
+            </li>
+            <li class="saas-shop-list-item">
+              <span class="saas-shop-icon-check"></span>
+              Четвёртое преимущество
+            </li>
+            <li class="saas-shop-list-item">
+              <span class="saas-shop-icon-check"></span>
+              Пятое преимущество
+            </li>
+          </ul>
+          <form class="saas-shop-card-form">
+            <div class="saas-shop-form-data">
+              <span class="saas-shop-count-name">Кол-во лицензий:</span>
+              <div class="saas-shop-form-control">
+                <span class="saas-shop-form-minus">-</span>
+                <input class="saas-shop-form-input"
+                       type="number" name="count" min="1" max="10" value="1">
+                <span class="saas-shop-form-plus">+</span>
+              </div>
+            </div>
+            <button class="saas-shop-card-button" type="button">
+              Купить за 6 500 ₽
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

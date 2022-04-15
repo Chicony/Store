@@ -1,10 +1,11 @@
 let widgetSaasShop = {
     idContainer: 'widgetSaasShop',
     pathStyle: './saas_shop_style.css',
-    api: 'http://testvm.plotpad.ru:3005/',
+    api: 'http://testvm.plotpad.ru:3005',
+    redirect: 'http://testvm.plotpad.ru/method',
 
     init: function (idProduct) {
-        fetch(this.api + 'api/products/' + idProduct + '?populate[0]=tariffs.tariff_variants')
+        fetch(this.api + '/api/products/' + idProduct + '?populate[0]=tariffs.tariff_variants')
             .then(function (response) {
                 if (response.status !== 200) {
                     return Promise.reject(new Error(response.statusText))
@@ -171,7 +172,7 @@ let widgetSaasShop = {
                     count = 1
                 }
 
-                let href = `http://localhost:4000/method?tariff_variant_id=${input.getAttribute('data-valueId')}&licenses_count=${count}`
+                let href = `${this.redirect}?tariff_variant_id=${input.getAttribute('data-valueId')}&licenses_count=${count}`
                 button.setAttribute('href', href)
                 totalPrice()
             }
@@ -181,7 +182,7 @@ let widgetSaasShop = {
             minus.addEventListener('click', changed)
             period.addEventListener('change', changed)
 
-            let href = `http://localhost:4000/method?tariff_variant_id=${input.getAttribute('data-valueId')}&licenses_count=${count}`
+            let href = `${this.redirect}?tariff_variant_id=${input.getAttribute('data-valueId')}&licenses_count=${count}`
             button.setAttribute('href', href)
             totalPrice()
         }

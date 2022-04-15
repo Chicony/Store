@@ -1,7 +1,7 @@
 let widgetSaasShop = {
     idContainer: 'widgetSaasShop',
     pathStyle: './saas_shop_style.css',
-    api: 'http://localhost:3005/',
+    api: 'http://testvm.plotpad.ru:3005/',
 
     init: function (idProduct) {
         fetch(this.api + 'api/products/' + idProduct + '?populate[0]=tariffs.tariff_variants')
@@ -15,8 +15,7 @@ let widgetSaasShop = {
                 return response.json()
             })
             .then((data) => {
-                console.log(data)
-                console.log(data)
+                //console.log(data)
                 let tariffArr = data.tariffs;
                 if (document.getElementById(this.idContainer)) {
                     this.addStyle();
@@ -104,7 +103,7 @@ let widgetSaasShop = {
                       <ul class="saas-shop-card-list">`
                         + listAdvantages +
                       `</ul>
-                      <form class="saas-shop-card-form">
+                      <div class="saas-shop-card-form">
                         <div class="saas-shop-form-data">
                           <div class="saas-shop-count-name">Кол-во лицензий:</div>
                           <div class="saas-shop-form-control" >
@@ -118,7 +117,7 @@ let widgetSaasShop = {
                             href="">
                           Купить за <span class="saas-shop-button-value"></span> ₽
                         </a>
-                      </form>
+                      </div>
                     </div>    
                     `;
             })
@@ -143,7 +142,7 @@ let widgetSaasShop = {
                     for (const el of tariffArr) {
                         if (el.id === parseInt(input.getAttribute('data-valueId')))
                         {
-                            valueButton.textContent = (el.tariff_variants[0].price * count).toLocaleString()
+                            valueButton.textContent = (el.tariff_variants[0].total_price * count).toLocaleString()
                         }
                     }
                 }
@@ -151,14 +150,27 @@ let widgetSaasShop = {
                     for (const el of tariffArr) {
                         if (el.id === parseInt(input.getAttribute('data-valueId')))
                         {
-                            valueButton.textContent = (el.tariff_variants[1].price * count).toLocaleString()
+                            valueButton.textContent = (el.tariff_variants[1].total_price * count).toLocaleString()
                         }
                     }
                 }
             }
 
             function changed() {
-                count = input.value
+                let max = parseInt(input.getAttribute('max'))
+
+                if ((max >= input.value) && (1 <= input.value)) {
+                    count = input.value
+                }
+                else if (input.value > max) {
+                    input.value = max
+                    count = max
+                }
+                else if (input.value < 1) {
+                    input.value = 1
+                    count = 1
+                }
+
                 let href = `http://localhost:4000/method?tariff_variant_id=${input.getAttribute('data-valueId')}&licenses_count=${count}`
                 button.setAttribute('href', href)
                 totalPrice()

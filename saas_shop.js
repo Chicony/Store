@@ -147,7 +147,7 @@ function saas_shop_create_tariffs(productID) {
     {
         calculation();
 
-        form[i].addEventListener('change', function (event) {
+        form[i].addEventListener('change', function () {
             calculation();
         });
 

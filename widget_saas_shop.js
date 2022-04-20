@@ -1,8 +1,7 @@
 let widgetSaasShop = {
-    idContainer: 'widgetSaasShop',
+    idContainer: '.saas_shop_tariffs',
     pathStyle: './saas_shop_style.css',
-    api: 'http://testvm.plotpad.ru:3005',
-    redirect: 'http://testvm.plotpad.ru/method',
+    api: (location.host === 'testvm.plotpad.ru') ? 'http://testvm.plotpad.ru:3005' : 'http://localhost:3005',
 
     init: function (idProduct) {
         fetch(this.api + '/api/products/' + idProduct + '?populate[0]=tariffs.tariff_variants')
@@ -18,7 +17,7 @@ let widgetSaasShop = {
             .then((data) => {
                 //console.log(data)
                 let tariffArr = data.tariffs;
-                if (document.getElementById(this.idContainer)) {
+                if (document.querySelector(this.idContainer)) {
                     this.addStyle();
                     this.widgetCreation(tariffArr);
                 } else {
@@ -39,7 +38,7 @@ let widgetSaasShop = {
     },
 
     widgetCreation: function (tariffArr) {
-        let widgetBox = document.getElementById(this.idContainer);
+        let widgetBox = document.querySelector(this.idContainer);
         let arrayLength = {
             length: 0,
             description: [],
@@ -115,7 +114,7 @@ let widgetSaasShop = {
                           </div>
                         </div>
                         <a class="saas-shop-card-button" type="button"
-                            href="">
+                            href="" target="_blank">
                           Купить за <span class="saas-shop-button-value"></span> ₽
                         </a>
                       </div>
@@ -138,12 +137,12 @@ let widgetSaasShop = {
             let count = input.value
 
             function totalPrice() {
-                if (!period.checked)
+                if (period.checked)
                 {
                     for (const el of tariffArr) {
                         if (el.id === parseInt(input.getAttribute('data-valueId')))
                         {
-                            valueButton.textContent = (el.tariff_variants[0].total_price * count).toLocaleString()
+                            valueButton.textContent = (el.tariff_variants[1].total_price * count).toLocaleString()
                         }
                     }
                 }
@@ -151,7 +150,7 @@ let widgetSaasShop = {
                     for (const el of tariffArr) {
                         if (el.id === parseInt(input.getAttribute('data-valueId')))
                         {
-                            valueButton.textContent = (el.tariff_variants[1].total_price * count).toLocaleString()
+                            valueButton.textContent = (el.tariff_variants[0].total_price * count).toLocaleString()
                         }
                     }
                 }
@@ -172,17 +171,33 @@ let widgetSaasShop = {
                     count = 1
                 }
 
-                let href = `${this.redirect}?tariff_variant_id=${input.getAttribute('data-valueId')}&licenses_count=${count}`
+                let href = createHref();
+
                 button.setAttribute('href', href)
                 totalPrice()
             }
-            
+
+            function createHref() {
+                for (const el of tariffArr) {
+                    if (el.id === parseInt(input.getAttribute('data-valueId')))
+                    {
+                        if (period.checked)
+                        {
+                            return `http://testvm.plotpad.ru:8080/account/workspace?tariff_variant_id=${el.tariff_variants[1].id}&licenses_count=${count}`
+                        }
+                        else{
+                            return `http://testvm.plotpad.ru:8080/account/workspace?tariff_variant_id=${el.tariff_variants[0].id}&licenses_count=${count}`
+                        }
+                    }
+                }
+            }
+
             input.addEventListener('change', changed)
             plus.addEventListener('click', changed)
             minus.addEventListener('click', changed)
             period.addEventListener('change', changed)
 
-            let href = `${this.redirect}?tariff_variant_id=${input.getAttribute('data-valueId')}&licenses_count=${count}`
+            let href = createHref()
             button.setAttribute('href', href)
             totalPrice()
         }
